@@ -1,6 +1,7 @@
 package com.develogical;
 
 import com.weather.Day;
+import com.weather.Forecast;
 import com.weather.Forecaster;
 import com.weather.Region;
 import org.junit.Test;
@@ -16,9 +17,11 @@ public class PutYourTestCodeInThisDirectoryTest {
 
     @Test
     public void placeholder() throws Exception {
+        given(forecaster.forecastFor(Region.LONDON, Day.MONDAY)).willReturn(new Forecast("test", 1 ));
         CustomForecaster underTest = new CustomForecaster(forecaster);
-        underTest.forecastFor(Region.LONDON, Day.MONDAY);
+        Forecast result = underTest.forecastFor(Region.LONDON, Day.MONDAY);
+        assertThat(result.summary(),equalTo("test"));
+        assertThat(result.temperature(), equalTo(1));
 
-        verify(forecaster).forecastFor(Region.LONDON, Day.MONDAY);
     }
 }
