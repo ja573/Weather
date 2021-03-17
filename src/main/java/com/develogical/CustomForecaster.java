@@ -12,8 +12,8 @@ public class CustomForecaster {
         this.forecaster = forecaster;
     }
 
-    public Forecast forecastFor(Region region, Day day) {
-        this.forecaster.forecastFor(region, day);
-        return null;
+    public CustomForecast forecastFor(Region region, Day day) {
+        Forecast original = this.forecaster.forecastFor(region, day);
+        return new CustomForecast(original.summary(), original.temperature());
     }
 }

@@ -16,12 +16,11 @@ public class PutYourTestCodeInThisDirectoryTest {
     Forecaster forecaster = mock(Forecaster.class);
 
     @Test
-    public void placeholder() throws Exception {
+    public void shouldReturnForecast() throws Exception {
         given(forecaster.forecastFor(Region.LONDON, Day.MONDAY)).willReturn(new Forecast("test", 1 ));
         CustomForecaster underTest = new CustomForecaster(forecaster);
-        Forecast result = underTest.forecastFor(Region.LONDON, Day.MONDAY);
+        CustomForecast result = underTest.forecastFor(Region.LONDON, Day.MONDAY);
         assertThat(result.summary(),equalTo("test"));
         assertThat(result.temperature(), equalTo(1));
-
     }
 }
