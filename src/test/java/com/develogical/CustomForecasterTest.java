@@ -60,6 +60,7 @@ public class CustomForecasterTest {
     public void shouldRefreshCacheOlderThanOneHour() throws Exception {
         given(forecaster.forecastFor(Region.LONDON, Day.MONDAY)).willReturn(new Forecast("test", 1 ));
 
+        //would be better to pass in a clock
         CustomForecaster underTest = new CustomForecaster(forecaster) {
             @Override
             public Instant getTimestamp() {
