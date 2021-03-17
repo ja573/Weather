@@ -26,4 +26,7 @@ public class CustomForecaster {
 
         return customForecast;
     }
+
+    public void setLimit(int i) {
+    }
 }

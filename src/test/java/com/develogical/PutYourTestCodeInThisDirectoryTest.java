@@ -33,6 +33,25 @@ public class PutYourTestCodeInThisDirectoryTest {
         verify(forecaster, times(1)).forecastFor(Region.LONDON, Day.MONDAY);
     }
 
+    // It should be possible to set a limit for the size of the cache, evicting
+    // old entries if the maximum size is reached.
+
+    @Test
+    public void shoulBeAbleToSetLimit() throws Exception {
+        given(forecaster.forecastFor(Region.LONDON, Day.MONDAY)).willReturn(new Forecast("test", 1 ));
+        given(forecaster.forecastFor(Region.LONDON, Day.TUESDAY)).willReturn(new Forecast("test", 2 ));
+        given(forecaster.forecastFor(Region.LONDON, Day.WEDNESDAY)).willReturn(new Forecast("test", 3 ));
+
+        CustomForecaster underTest = new CustomForecaster(forecaster);
+        underTest.setLimit(2);
+
+        underTest.forecastFor(Region.LONDON, Day.MONDAY);
+        underTest.forecastFor(Region.LONDON, Day.TUESDAY);
+        underTest.forecastFor(Region.LONDON, Day.WEDNESDAY);
+        underTest.forecastFor(Region.LONDON, Day.MONDAY);
+
+        verify(forecaster, times(2)).forecastFor(Region.LONDON, Day.MONDAY);
+    }
 
 
 
