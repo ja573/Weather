@@ -9,5 +9,6 @@ public class PutYourTestCodeInThisDirectoryTest {
     @Test
     public void placeholder() throws Exception {
         assertThat(2, equalTo(2));
+        CustomForecaster forecaster = new CustomForecaster();
     }
 }
