@@ -32,4 +32,8 @@ public class PutYourTestCodeInThisDirectoryTest {
         underTest.forecastFor(Region.LONDON, Day.MONDAY);
         verify(forecaster, times(1)).forecastFor(Region.LONDON, Day.MONDAY);
     }
+
+
+
+
 }
