@@ -6,6 +6,9 @@ import com.weather.Forecaster;
 import com.weather.Region;
 import org.junit.Test;
 
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 
@@ -53,6 +56,20 @@ public class CustomForecasterTest {
         verify(forecaster, times(2)).forecastFor(Region.LONDON, Day.MONDAY);
     }
 
+    @Test
+    public void shouldRefreshCacheOlderThanOneHour() throws Exception {
+        given(forecaster.forecastFor(Region.LONDON, Day.MONDAY)).willReturn(new Forecast("test", 1 ));
 
+        CustomForecaster underTest = new CustomForecaster(forecaster) {
+            @Override
+            public Instant getTimestamp() {
+                return Instant.now().minus(3600, ChronoUnit.SECONDS);
+            }
+        };
+        underTest.setLimit(2);
 
+        underTest.forecastFor(Region.LONDON, Day.MONDAY);
+
+        verify(forecaster, times(2)).forecastFor(Region.LONDON, Day.MONDAY);
+    }
 }

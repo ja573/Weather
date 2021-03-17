@@ -5,6 +5,7 @@ import com.weather.Forecast;
 import com.weather.Forecaster;
 import com.weather.Region;
 
+import java.time.Instant;
 import java.util.*;
 
 public class CustomForecaster {
@@ -23,7 +24,7 @@ public class CustomForecaster {
             return cache.get(key);
         }
         Forecast original = this.forecaster.forecastFor(region, day);
-        CustomForecast customForecast = new CustomForecast(original.summary(), original.temperature());
+        CustomForecast customForecast = new CustomForecast(original.summary(), original.temperature(), this.getTimestamp());
         if (cacheList.size() >= this.cacheLimit) {
             String oldestKey = cacheList.get(0);
             cacheList.remove(0);
@@ -37,5 +38,9 @@ public class CustomForecaster {
 
     public void setLimit(int i) {
         this.cacheLimit = i;
+    }
+
+    public Instant getTimestamp() {
+        return Instant.now();
     }
 }
