@@ -23,4 +23,13 @@ public class PutYourTestCodeInThisDirectoryTest {
         assertThat(result.summary(),equalTo("test"));
         assertThat(result.temperature(), equalTo(1));
     }
+
+    @Test
+    public void shouldOnlyCallOriginalOnce() throws Exception {
+        given(forecaster.forecastFor(Region.LONDON, Day.MONDAY)).willReturn(new Forecast("test", 1 ));
+        CustomForecaster underTest = new CustomForecaster(forecaster);
+        underTest.forecastFor(Region.LONDON, Day.MONDAY);
+        underTest.forecastFor(Region.LONDON, Day.MONDAY);
+        verify(forecaster, times(1)).forecastFor(Region.LONDON, Day.MONDAY);
+    }
 }
