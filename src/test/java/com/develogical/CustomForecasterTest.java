@@ -37,7 +37,7 @@ public class CustomForecasterTest {
     // old entries if the maximum size is reached.
 
     @Test
-    public void shoulBeAbleToSetLimit() throws Exception {
+    public void shouldBeAbleToSetLimit() throws Exception {
         given(forecaster.forecastFor(Region.LONDON, Day.MONDAY)).willReturn(new Forecast("test", 1 ));
         given(forecaster.forecastFor(Region.LONDON, Day.TUESDAY)).willReturn(new Forecast("test", 2 ));
         given(forecaster.forecastFor(Region.LONDON, Day.WEDNESDAY)).willReturn(new Forecast("test", 3 ));
