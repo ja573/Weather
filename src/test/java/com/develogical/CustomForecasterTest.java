@@ -12,7 +12,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 
-public class PutYourTestCodeInThisDirectoryTest {
+public class CustomForecasterTest {
     Forecaster forecaster = mock(Forecaster.class);
 
     @Test
